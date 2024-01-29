@@ -2,7 +2,7 @@ FROM openjdk:11
 
 WORKDIR /src
 
-COPY target/pdf-spire-0.0.1-SNAPSHOT.jar
+COPY target/pdf-spire-0.0.1-SNAPSHOT.jar /src/
 
 EXPOSE 8080
 
