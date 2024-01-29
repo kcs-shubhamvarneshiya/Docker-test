@@ -1,0 +1,33 @@
+name: Build and Publish Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Docker
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '11'
+
+    - name: Build and tag Docker image
+      run: |
+        docker build -t my-java-app:${{ github.sha }} .
+        docker tag my-java-app:${{ github.sha }} my-java-app:latest
+
+    - name: Push Docker image to Docker Desktop
+      run: |
+        echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
+        docker tag my-java-app:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/my-java-app:${{ github.sha }}
+        docker tag my-java-app:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/my-java-app:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/my-java-app:${{ github.sha }}
+        docker push ${{ secrets.DOCKER_USERNAME }}/my-java-app:latest
