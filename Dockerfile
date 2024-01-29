@@ -1,9 +1,3 @@
-FROM openjdk:11
-
-WORKDIR /src
-
-COPY target/pdf-spire-0.0.1-SNAPSHOT.jar /src/
-
-EXPOSE 8080
-
-CMD ["java", "-jar", "pdf-spire-0.0.1-SNAPSHOT.jar"]
+FROM openjdk:11 AS build
+COPY target/*.jar pdf-spire-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java", "-jar", "pdf-spire-0.0.1-SNAPSHOT.jar"]
