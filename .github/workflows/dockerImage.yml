@@ -3,7 +3,7 @@ name: Build and Publish Docker Image
 on:
   push:
     branches:
-      - main
+      - "*"
 
 jobs:
   build-and-publish:
@@ -25,7 +25,7 @@ jobs:
       - name: Build and tag Docker image
         run: |
           docker build -t my-java-app:${{ github.sha }} .
-          docker tag my-java-app:${{ github.sha }} my-java-app:latest
+          docker tag my-java-app:${{ github.sha }} my-java-app:latest version
 
       - name: Push Docker image to Docker Desktop
         run: |
