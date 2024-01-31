@@ -22,10 +22,10 @@ jobs:
       - name: maven Build
         run: mvn clean install
 
-      - name: Remove previous Docker image
-        run: |
-          docker rmi -f semi-java:latest || true
-          docker rmi -f ${{ secrets.DOCKER_USERNAME }}/semi-java:${{ github.sha }} || true
+      # - name: Remove previous Docker image
+      #   run: |
+      #     docker rmi -f semi-java:latest || true
+      #     docker rmi -f ${{ secrets.DOCKER_USERNAME }}/semi-java:${{ github.sha }} || true
 
       - name: Build and tag Docker image
         run: |
