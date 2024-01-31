@@ -14,10 +14,4 @@ public class FormController {
 	public String generateForm() throws Exception {
 		 return "Application is running...";
 	}
-
-	@GetMapping("/test")
-	public String test() throws Exception {
-		 return "Hello semicolon...";
-	}
-
 }
