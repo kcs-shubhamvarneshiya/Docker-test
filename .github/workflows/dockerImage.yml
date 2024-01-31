@@ -30,8 +30,6 @@ jobs:
       - name: Push Docker image to Docker Desktop
         run: |
           echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker tag my-java-app:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/my-java-app:${{ github.sha }}
-          docker tag my-java-app:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/my-java-app:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/my-java-app:${{ github.sha }}
-          docker push ${{ secrets.DOCKER_USERNAME }}/my-java-app:latest
+          docker tag semi-java:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/semi-java:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/semi-java:${{ github.sha }}
         
