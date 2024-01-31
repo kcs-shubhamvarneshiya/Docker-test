@@ -25,7 +25,7 @@ jobs:
       - name: Build and tag Docker image
         run: |
           docker build -t semi-java:${{ github.sha }} .
-          docker tag semi-java:${{ github.sha }} semi-java:latest version
+          docker tag semi-java:${{ github.sha }} semi-java:latest
 
       - name: Push Docker image to Docker Desktop
         run: |
