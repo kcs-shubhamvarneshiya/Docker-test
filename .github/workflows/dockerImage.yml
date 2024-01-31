@@ -24,12 +24,12 @@ jobs:
 
       - name: Build and tag Docker image
         run: |
-          docker build -t my-java-app:${{ github.sha }} .
-          docker tag my-java-app:${{ github.sha }} my-java-app:latest version
+          docker build -t semi-java:${{ github.sha }} .
+          docker tag semi-java:${{ github.sha }} semi-java:latest version
 
       - name: Push Docker image to Docker Desktop
         run: |
           echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker tag my-java-app:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/my-java-app:${{ github.sha }}
-          docker push ${{ secrets.DOCKER_USERNAME }}/my-java-app:${{ github.sha }}
+          docker tag semi-java:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/semi-java:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/semi-java:${{ github.sha }}
         
