@@ -22,6 +22,11 @@ jobs:
       - name: maven Build
         run: mvn clean install
 
+      - name: Remove previous Docker image
+        run: |
+          docker rmi -f semi-java:latest || true
+          docker rmi -f ${{ secrets.DOCKER_USERNAME }}/semi-java:${{ github.sha }} || true
+
       - name: Build and tag Docker image
         run: |
           docker build -t semi-java:${{ github.sha }} .
@@ -30,6 +35,7 @@ jobs:
       - name: Push Docker image to Docker Desktop
         run: |
           echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
-          docker tag semi-java:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/semi-java:${{ github.sha }}
-          docker push ${{ secrets.DOCKER_USERNAME }}/semi-java:${{ github.sha }}
-        
+          docker tag my-java-app:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/my-java-app:${{ github.sha }}
+          docker tag my-java-app:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/my-java-app:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/my-java-app:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/my-java-app:latest
