@@ -11,4 +11,9 @@ public class FormController {
 	public String generateForm() throws Exception {
 		return "Hello semicolon..";
 	}
+
+	@GetMapping("/test")
+	public String test() throws Exception {
+		return "Hello semicolon.. from test...";
+	}
 }
